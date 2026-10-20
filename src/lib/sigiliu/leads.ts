@@ -11,7 +11,7 @@ export type Lead = {
   at: string;
 };
 
-const KEY = "sigiliu.leads";
+const KEY = "rampa.leads";
 
 export function readLeads(): Lead[] {
   if (typeof window === "undefined") return [];

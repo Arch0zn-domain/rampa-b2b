@@ -1,10 +1,11 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
-import { Archive, ArrowRight, ClipboardCheck, Menu, Truck, X } from "lucide-react";
+import { Archive, ArrowRight, ClipboardCheck, Menu, X } from "lucide-react";
 import { COMPANY, copy, lanes, type Lang, type Lane } from "@/lib/sigiliu/content";
 import { saveLead } from "@/lib/sigiliu/leads";
+import { Seal } from "@/components/sigiliu/seal";
 
-const LANG_KEY = "sigiliu.lang";
+const LANG_KEY = "rampa.lang";
 
 function Field({
   label,
@@ -101,9 +102,7 @@ export function Landing() {
       <header className="sticky top-0 z-20 border-b border-line bg-asphalt/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
           <a href="#top" className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-amber text-ink">
-              <Truck className="h-4 w-4" aria-hidden />
-            </span>
+            <Seal className="h-11 w-11" />
             <span className="text-lg font-medium tracking-tight">{COMPANY}</span>
           </a>
           <nav className="hidden items-center gap-8 text-sm text-mist md:flex">
@@ -188,8 +187,9 @@ export function Landing() {
               <div>
                 <p className="font-mono text-xs tracking-widest text-fog uppercase">{t.cmr.doc}</p>
                 <h2 className="mt-1 text-2xl font-medium">CMR</h2>
+                <p className="mt-1 font-mono text-xs text-fog">{lane.ref}</p>
               </div>
-              <span className="rounded-full bg-amber px-3 py-1 font-mono text-xs text-ink">{lane.ref}</span>
+              <Seal className="h-24 w-24 shrink-0 -rotate-6" />
             </div>
             <p className="mt-3 text-sm text-fog">{t.cmr.hint}</p>
             <div className="mt-4 flex flex-wrap gap-2">

@@ -3,7 +3,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Sigiliu";
+const APP_NAME = "Rampa";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Sigiliu pregătește CMR-ul pentru flotele din România care merg în Europa. Mai puțină hârtie seara, mai puține greșeli la frontieră.",
+          "Rampa pregătește CMR-ul pentru flotele din România care merg în Europa. Mai puțină hârtie seara, mai puține greșeli la frontieră.",
       },
       { name: "theme-color", content: "#141612" },
     ],

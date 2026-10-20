@@ -1,6 +1,6 @@
 export type Lang = "ro" | "en";
 
-export const COMPANY = "Sigiliu";
+export const COMPANY = "Rampa";
 
 export const lanes = [
   {
@@ -12,8 +12,8 @@ export const lanes = [
     unload: "München, DE",
     goods: "Piese auto, 22 paleți",
     weight: "18.400 kg",
-    plates: "CJ 24 SIG",
-    ref: "SIG-20418",
+    plates: "CJ 24 RMP",
+    ref: "RMP-20418",
   },
   {
     id: "it",
@@ -24,8 +24,8 @@ export const lanes = [
     unload: "Milano, IT",
     goods: "Lactate refrigerate, 18 paleți",
     weight: "16.200 kg",
-    plates: "B 108 SIG",
-    ref: "SIG-18802",
+    plates: "B 108 RMP",
+    ref: "RMP-18802",
   },
   {
     id: "nl",
@@ -36,16 +36,16 @@ export const lanes = [
     unload: "Rotterdam, NL",
     goods: "Marfă generală, grupaj",
     weight: "21.050 kg",
-    plates: "BH 77 SIG",
-    ref: "SIG-17640",
+    plates: "BH 77 RMP",
+    ref: "RMP-17640",
   },
 ] as const;
 
 export type Lane = (typeof lanes)[number];
 
 export const descriptions = {
-  en: "Sigiliu is a CMR automation service for small and medium European road-transport companies, starting with carriers based in Romania. It takes the trip details a dispatcher already keeps — who ships, who receives, where the truck loads and unloads, what is on board, and how much it weighs — and prepares a complete consignment note, a copy the driver can take, and an archive you can search when a customer or an insurer asks months later. It is aimed at fleets of roughly 5 to 50 trucks: enough paperwork to justify a system, and not enough staff for an IT department. The first version is for Romania–EU routes, so owners and dispatchers spend less of the evening on forms and send trucks out with fewer missing fields.",
-  ro: "Sigiliu este un serviciu de automatizare a CMR-ului pentru firme mici și mijlocii de transport rutier din Europa, cu primii clienți în România. Pornește de la datele pe care dispecerul le are deja — expeditor, destinatar, loc de încărcare și descărcare, marfă și greutate — și pregătește scrisoarea de trăsură, copia pentru șofer și o arhivă în care găsești documentul și peste șase luni, când apare o reclamație. Este pentru flote de aproximativ 5–50 de camioane: suficientă hârtie cât să merite un sistem, dar fără departament de IT. Prima versiune acoperă cursele România–UE, ca patronul și dispecerul să nu mai închidă seara pe formulare și să plece camionul cu mai puține câmpuri lipsă.",
+  en: "Rampa is a CMR automation service for small and medium European road-transport companies, starting with carriers based in Romania. It takes the trip details a dispatcher already keeps — who ships, who receives, where the truck loads and unloads, what is on board, and how much it weighs — and prepares a complete consignment note, a copy the driver can take, and an archive you can search when a customer or an insurer asks months later. It is aimed at fleets of roughly 5 to 50 trucks: enough paperwork to justify a system, and not enough staff for an IT department. The first version is for Romania–EU routes, so owners and dispatchers spend less of the evening on forms and send trucks out with fewer missing fields.",
+  ro: "Rampa este un serviciu de automatizare a CMR-ului pentru firme mici și mijlocii de transport rutier din Europa, cu primii clienți în România. Pornește de la datele pe care dispecerul le are deja — expeditor, destinatar, loc de încărcare și descărcare, marfă și greutate — și pregătește scrisoarea de trăsură, copia pentru șofer și o arhivă în care găsești documentul și peste șase luni, când apare o reclamație. Este pentru flote de aproximativ 5–50 de camioane: suficientă hârtie cât să merite un sistem, dar fără departament de IT. Prima versiune acoperă cursele România–UE, ca patronul și dispecerul să nu mai închidă seara pe formulare și să plece camionul cu mai puține câmpuri lipsă.",
 };
 
 type Bundle = {
@@ -122,7 +122,7 @@ export const copy: Record<Lang, Bundle> = {
       kicker: "Pentru flote din România, pe curse în UE",
       title: "CMR-ul e gata înainte să iasă camionul din curte.",
       accent: "Fără seară pierdută pe formulare.",
-      body: "Sigiliu ia datele pe care dispecerul le știe deja și pregătește scrisoarea de trăsură, copia pentru șofer și arhiva. Pentru firme cu 5–50 de camioane, nu pentru corporații cu departament de IT.",
+      body: "Rampa ia datele pe care dispecerul le știe deja și pregătește scrisoarea de trăsură, copia pentru șofer și arhiva. Pentru firme cu 5–50 de camioane, nu pentru corporații cu departament de IT.",
       primary: "Vreau loc pe listă",
       secondary: "Vezi un CMR umplut",
       note: "Produsul se construiește acum. Lista e pentru patroni și dispeceri care vor să îl vadă primii.",
@@ -144,7 +144,7 @@ export const copy: Record<Lang, Bundle> = {
     ],
     fitTitle: "Făcut pentru firma care duce marfa, nu pentru softiști",
     fitLead:
-      "Dacă hârtia o face patronul, dispecerul sau o singură fată de la birou, Sigiliu e pentru voi. Dacă aveți deja SAP și un departament de IT, nu.",
+      "Dacă hârtia o face patronul, dispecerul sau o singură fată de la birou, Rampa e pentru voi. Dacă aveți deja SAP și un departament de IT, nu.",
     yes: "Da, dacă",
     no: "Nu încă, dacă",
     yesItems: [
@@ -221,7 +221,7 @@ export const copy: Record<Lang, Bundle> = {
     faqs: [
       {
         q: "Înlocuiește CMR-ul de hârtie, legal, din prima zi?",
-        a: "Nu promitem asta. În multe relații încă se cere exemplarul de hârtie, semnat. Sigiliu pregătește documentul corect și îl păstrează. eCMR-ul electronic, recunoscut peste tot în UE, depinde de țări și de clienți — îl spunem când e adevărat, nu înainte.",
+        a: "Nu promitem asta. În multe relații încă se cere exemplarul de hârtie, semnat. Rampa pregătește documentul corect și îl păstrează. eCMR-ul electronic, recunoscut peste tot în UE, depinde de țări și de clienți — îl spunem când e adevărat, nu înainte.",
       },
       {
         q: "Faceți și e-Transport / UIT?",
@@ -229,14 +229,14 @@ export const copy: Record<Lang, Bundle> = {
       },
       {
         q: "Trebuie să schimb programul de acum?",
-        a: "Nu. Dacă lucrezi din Excel, WhatsApp și mail, rămâi acolo. Sigiliu nu e un TMS. E locul în care cursa devine CMR.",
+        a: "Nu. Dacă lucrezi din Excel, WhatsApp și mail, rămâi acolo. Rampa nu e un TMS. E locul în care cursa devine CMR.",
       },
       {
         q: "Cât costă?",
         a: "Încă nu e un preț de listă. Primele flote intră ca să spună ce merită plătit: pe camion, pe CMR sau un abonament mic de firmă. Fără departament de IT de întreținut.",
       },
     ],
-    footer: "Sigiliu · CMR pentru flotele din România",
+    footer: "Rampa · CMR pentru flotele din România",
     fisa: "Fișă pentru listări",
   },
   en: {
@@ -250,7 +250,7 @@ export const copy: Record<Lang, Bundle> = {
       kicker: "For Romanian fleets running into the EU",
       title: "The CMR is ready before the truck leaves the yard.",
       accent: "No evening lost to forms.",
-      body: "Sigiliu takes the details a dispatcher already has and prepares the consignment note, the driver’s copy, and the archive. For companies with 5–50 trucks, not for groups with an IT department.",
+      body: "Rampa takes the details a dispatcher already has and prepares the consignment note, the driver’s copy, and the archive. For companies with 5–50 trucks, not for groups with an IT department.",
       primary: "Join the list",
       secondary: "See a filled CMR",
       note: "The product is being built now. The list is for owners and dispatchers who want to see it first.",
@@ -272,7 +272,7 @@ export const copy: Record<Lang, Bundle> = {
     ],
     fitTitle: "Built for the company that moves the freight",
     fitLead:
-      "If the paperwork is done by the owner, the dispatcher, or one person in the office, Sigiliu is for you. If you already run SAP and an IT team, it is not.",
+      "If the paperwork is done by the owner, the dispatcher, or one person in the office, Rampa is for you. If you already run SAP and an IT team, it is not.",
     yes: "Yes, if",
     no: "Not yet, if",
     yesItems: [
@@ -349,7 +349,7 @@ export const copy: Record<Lang, Bundle> = {
     faqs: [
       {
         q: "Does this legally replace the paper CMR on day one?",
-        a: "We will not claim that. On many lanes the signed paper copy is still what is asked for. Sigiliu prepares a complete note and keeps it. Electronic eCMR, accepted everywhere in the EU, depends on the countries and the customers — we will say so when it is true.",
+        a: "We will not claim that. On many lanes the signed paper copy is still what is asked for. Rampa prepares a complete note and keeps it. Electronic eCMR, accepted everywhere in the EU, depends on the countries and the customers — we will say so when it is true.",
       },
       {
         q: "Do you handle Romanian e-Transport / UIT codes?",
@@ -357,14 +357,14 @@ export const copy: Record<Lang, Bundle> = {
       },
       {
         q: "Do we have to replace what we use now?",
-        a: "No. If you work from Excel, WhatsApp, and email, stay there. Sigiliu is not a TMS. It is where a trip becomes a CMR.",
+        a: "No. If you work from Excel, WhatsApp, and email, stay there. Rampa is not a TMS. It is where a trip becomes a CMR.",
       },
       {
         q: "What does it cost?",
         a: "There is no list price yet. The first fleets help decide what is worth paying: per truck, per CMR, or a small company fee. Nothing that needs an IT department to keep running.",
       },
     ],
-    footer: "Sigiliu · CMR for fleets in Romania",
+    footer: "Rampa · CMR for fleets in Romania",
     fisa: "Listing sheet",
   },
 };

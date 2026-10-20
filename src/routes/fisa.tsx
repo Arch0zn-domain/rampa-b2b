@@ -22,7 +22,7 @@ function Fisa() {
     <main className="min-h-screen bg-asphalt px-5 py-12 text-paper">
       <div className="mx-auto max-w-3xl">
         <Link to="/" className="text-sm text-mist hover:text-paper">
-          ← Sigiliu
+          ← {COMPANY}
         </Link>
         <h1 className="mt-6 text-4xl font-medium tracking-tight">Fișă pentru listări</h1>
         <p className="mt-3 leading-relaxed text-mist">
