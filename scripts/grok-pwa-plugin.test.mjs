@@ -6,9 +6,9 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 import {
   appNameFromHost,
-  createHeadInjector,
+  createHeadInjector as createHeadInjectorWithSite,
   grokXCreatorHeadTags,
-  injectGrokPwaHead,
+  injectGrokPwaHead as injectGrokPwaHeadWithSite,
   isDocumentPath,
   isInstallQuery,
   publicAppHost,
@@ -20,6 +20,10 @@ import {
 import { renderInstallPage } from "./grok-pwa-plugin.mjs";
 
 const TEMPLATE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+// Unit fixtures must not inherit the current product's title, card, or canonical host.
+const EMPTY_SITE_ROOT = mkdtempSync(join(tmpdir(), "pwa-empty-site-"));
+const injectGrokPwaHead = (html, context = {}) => injectGrokPwaHeadWithSite(html, { cwd: EMPTY_SITE_ROOT, ...context });
+const createHeadInjector = (context = {}) => createHeadInjectorWithSite({ cwd: EMPTY_SITE_ROOT, ...context });
 
 test("injects before </head>", () => {
   const out = injectGrokPwaHead("<html><head><title>x</title></head><body></body></html>");
