@@ -3,7 +3,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Rampa";
+const APP_NAME = "Rampa — CMR pentru flote din România";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,13 +14,20 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Rampa pregătește CMR-ul pentru flotele din România care merg în Europa. Mai puțină hârtie seara, mai puține greșeli la frontieră.",
+          "Comanda intră. CMR-ul pleacă. Rampa construiește un flux simplu pentru CMR și documente de livrare. Înscrieri în pilot pentru flote cu 5–50 de camioane.",
       },
-      { name: "theme-color", content: "#141612" },
+      { name: "theme-color", content: "#111714" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/ibm-plex-sans-latin-500-normal.woff2",
+        crossOrigin: "anonymous",
+      },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
     ],

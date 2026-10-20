@@ -10,11 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConfidentialitateRouteImport } from './routes/confidentialitate'
 import { Route as FisaRouteImport } from './routes/fisa'
+import { Route as ApiPilotRouteImport } from './routes/api.pilot'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialitateRoute = ConfidentialitateRouteImport.update({
+  id: '/confidentialitate',
+  path: '/confidentialitate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FisaRoute = FisaRouteImport.update({
@@ -22,31 +29,44 @@ const FisaRoute = FisaRouteImport.update({
   path: '/fisa',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPilotRoute = ApiPilotRouteImport.update({
+  id: '/api/pilot',
+  path: '/api/pilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
+  '/api/pilot': typeof ApiPilotRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
+  '/api/pilot': typeof ApiPilotRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
+  '/api/pilot': typeof ApiPilotRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fisa'
+  fullPaths: '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fisa'
-  id: '__root__' | '/' | '/fisa'
+  to: '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
+  id: '__root__' | '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConfidentialitateRoute: typeof ConfidentialitateRoute
   FisaRoute: typeof FisaRoute
+  ApiPilotRoute: typeof ApiPilotRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +78,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confidentialitate': {
+      id: '/confidentialitate'
+      path: '/confidentialitate'
+      fullPath: '/confidentialitate'
+      preLoaderRoute: typeof ConfidentialitateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fisa': {
       id: '/fisa'
       path: '/fisa'
@@ -65,12 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FisaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/pilot': {
+      id: '/api/pilot'
+      path: '/api/pilot'
+      fullPath: '/api/pilot'
+      preLoaderRoute: typeof ApiPilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConfidentialitateRoute: ConfidentialitateRoute,
   FisaRoute: FisaRoute,
+  ApiPilotRoute: ApiPilotRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

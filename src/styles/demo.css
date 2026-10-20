@@ -1,0 +1,307 @@
+.demo-console {
+  position: relative;
+  min-width: 0;
+  padding: 0.75rem;
+  background: #1c2720;
+  border: 1px solid #3a4c3e;
+  border-radius: 10px;
+}
+.console-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.375rem 1.125rem;
+  color: #c0cdbf;
+  font: 0.5625rem var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.console-bar > span:first-child {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.console-mark {
+  color: #8fa092;
+}
+.demo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px solid #d5d9c9;
+  padding: 1.125rem 1.125rem 0.625rem;
+  background: #ecefe4;
+  color: var(--color-ink);
+  border-radius: 5px 5px 0 0;
+}
+.demo-toolbar select {
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 0;
+  background: transparent;
+}
+.sample-tag {
+  flex-shrink: 0;
+  font: 0.5rem var(--font-mono);
+  letter-spacing: 0.04em;
+  color: #55624f;
+  border: 1px solid #b6bfaa;
+  padding: 0.25rem 0.375rem;
+}
+.demo-stage-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.375rem 1.125rem;
+  background: #ecefe4;
+  color: #687461;
+}
+.demo-stage-switch button {
+  min-height: 40px;
+  font-size: 0.75rem;
+  color: #52624b;
+  border: 0;
+  background: none;
+}
+.demo-stage-switch button > span {
+  font: 0.5625rem var(--font-mono);
+  margin-right: 0.375rem;
+}
+.demo-stage-switch button[aria-pressed="true"] {
+  color: #15271a;
+  font-weight: 600;
+}
+.order-sheet,
+.cmr-sheet {
+  min-height: 430px;
+  padding: 1.5rem;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border-top: 1px solid #d1d5c7;
+}
+.sheet-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #586351;
+  font: 0.5rem var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.sheet-heading > span:last-child {
+  margin-left: auto;
+  font-size: 0.625rem;
+}
+.order-sheet h2 {
+  max-width: 19rem;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+.order-message {
+  margin-top: 0.875rem;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: #5c6757;
+  white-space: pre-line;
+}
+.trip-route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block: 1.25rem;
+  padding-block: 1rem;
+  border-block: 1px solid #d1d5c7;
+}
+.trip-route > div:not(.route-connector) {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1;
+}
+.trip-route small {
+  display: block;
+  font-size: 0.625rem;
+  color: #616e5a;
+}
+.trip-route strong {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+.route-point {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #496044;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.route-point.arrival {
+  background: var(--color-ink);
+}
+.route-connector {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #5f7056;
+  flex: 0.6;
+}
+.route-connector > span {
+  flex: 1;
+  min-width: 6px;
+  border-top: 1px dashed #9aa18c;
+}
+.order-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.order-data dt {
+  color: #63705b;
+  font-size: 0.625rem;
+}
+.order-data dd {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.prepare-button {
+  margin-top: 1.375rem;
+  width: 100%;
+  min-height: 46px;
+  font-size: 0.75rem;
+  justify-content: space-between;
+}
+.cmr-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cmr-heading p {
+  font: 0.5625rem var(--font-mono);
+  letter-spacing: 0.075em;
+  color: #596653;
+}
+.cmr-heading h2 {
+  margin-top: 0.375rem;
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.cmr-heading h2 > span {
+  font: 0.625rem var(--font-mono);
+  color: #53634a;
+}
+.document-seal {
+  width: 56px;
+  height: 56px;
+  transform: rotate(-9deg);
+}
+.review-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block: 0.875rem;
+  color: #496042;
+  font-size: 0.625rem;
+}
+.cmr-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.cmr-fields label {
+  display: block;
+  min-width: 0;
+  padding: 0.625rem;
+  border: 1px solid #c6ceba;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+.cmr-fields label > span {
+  display: block;
+  color: #54624b;
+  font-size: 0.625rem;
+}
+.cmr-fields b {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  margin-right: 0.375rem;
+  font: 0.5rem var(--font-mono);
+  border: 1px solid #9da991;
+  border-radius: 2px;
+}
+.cmr-fields input {
+  margin-top: 0.25rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 30px;
+  padding: 0.25rem 0;
+  color: var(--color-ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed #8e9d7b;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0;
+}
+.document-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.document-actions .button {
+  flex: 1;
+  min-height: 44px;
+  font-size: 0.75rem;
+}
+.print-disclaimer {
+  margin-top: 0.625rem;
+  color: #646e5c;
+  font-size: 0.625rem;
+  line-height: 1.6;
+}
+.demo-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: #e1e8d4;
+  color: #3a5031;
+  font-size: 0.625rem;
+  border-radius: 0 0 4px 4px;
+}
+.demo-honesty {
+  font-size: 0.625rem;
+  line-height: 1.7;
+  color: #b9c7b7;
+  padding: 0.875rem 0.375rem 0.25rem;
+}
+.demo-next {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  bottom: -22px;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-amber);
+  color: var(--color-ink);
+  border: 5px solid var(--color-asphalt);
+}
+.print-document {
+  display: none;
+}
+
+/* Focus on the paper surfaces needs a dark outline. */
+:is(.order-sheet, .cmr-sheet, .demo-toolbar, .demo-stage-switch) :focus-visible {
+  outline-color: #31532d;
+}
