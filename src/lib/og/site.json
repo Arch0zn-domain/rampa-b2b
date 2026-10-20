@@ -1,4 +1,6 @@
 {
-  "title": "Rampa",
-  "card": "custom"
+  "title": "Rampa — CMR-uri pentru flote din România",
+  "description": "Comanda, CMR-ul și documentele cursei, într-un flux clar. Rampa este în dezvoltare pentru transportatorii din România cu 5–50 de camioane.",
+  "card": "custom",
+  "publicHost": "rampa-mea.vercel.app"
 }

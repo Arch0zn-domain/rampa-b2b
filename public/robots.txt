@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /fisa
+Disallow: /api/
+Sitemap: https://rampa-mea.vercel.app/sitemap.xml

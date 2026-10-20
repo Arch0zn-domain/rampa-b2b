@@ -347,7 +347,12 @@ export function grokOgHeadTags({
   cwd = process.cwd(),
 } = {}) {
   const title = resolveOgTitle(site, appName, host, documentTitle);
-  const publicHost = resolvePublicHost(host);
+  // A standalone site's declared canonical host is safe to use even on Vercel.
+  // Continue rejecting inferred deployment hosts, which may require authentication.
+  const declaredHost = String(site.publicHost ?? "").trim().toLowerCase();
+  const publicHost = /^[a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,}$/.test(declaredHost)
+    ? declaredHost
+    : resolvePublicHost(host);
   const tags = [
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,

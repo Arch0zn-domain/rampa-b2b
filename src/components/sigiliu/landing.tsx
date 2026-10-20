@@ -1,442 +1,346 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Archive, ArrowRight, ClipboardCheck, Menu, X } from "lucide-react";
-import { COMPANY, copy, lanes, type Lang, type Lane } from "@/lib/sigiliu/content";
-import { saveLead } from "@/lib/sigiliu/leads";
-import { Seal } from "@/components/sigiliu/seal";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Archive,
+  Check,
+  CheckCheck,
+  FileText,
+  Menu,
+  Plus,
+  ScanLine,
+  Truck,
+  X,
+} from "lucide-react";
+import { pageCopy } from "@/lib/sigiliu/page-copy";
+import type { Lang } from "@/lib/sigiliu/content";
+import { Seal } from "./seal";
+import { TripDemo } from "./trip-demo";
+import { PilotForm } from "./pilot-form";
 
-const LANG_KEY = "rampa.lang";
-
-function Field({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="border-b border-line/80 py-3">
-      <div className="font-mono text-xs tracking-wide text-fog">{label}</div>
-      <div className="mt-1 text-base text-ink">{value}</div>
-    </div>
-  );
-}
+const anchors = ["#example", "#how", "#fit"];
+const painIcons = [FileText, CheckCheck, Archive];
 
 export function Landing() {
   const [lang, setLang] = useState<Lang>("ro");
-  const [open, setOpen] = useState(false);
-  const [lane, setLane] = useState<Lane>(lanes[0]);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
-  const [form, setForm] = useState({
-    name: "",
-    company: "",
-    role: copy.ro.form.roles[0],
-    email: "",
-    phone: "",
-    fleet: copy.ro.form.fleets[1],
-    lane: copy.ro.form.laneOptions[1],
-    pain: copy.ro.form.pains[0],
-  });
-
-  const t = copy[lang];
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const t = pageCopy[lang];
   useEffect(() => {
-    const stored = window.localStorage.getItem(LANG_KEY);
-    const next: Lang = stored === "en" ? "en" : "ro";
-    setLang(next);
-    const bundle = copy[next].form;
-    setForm((current) => ({
-      ...current,
-      role: bundle.roles[0],
-      fleet: bundle.fleets[1],
-      lane: bundle.laneOptions[1],
-      pain: bundle.pains[0],
-    }));
+    try {
+      if (localStorage.getItem("rampa.lang") === "en") setLang("en");
+    } catch {
+      /* The page also works when storage is disabled. */
+    }
   }, []);
-
   useEffect(() => {
     document.documentElement.lang = lang;
-    window.localStorage.setItem(LANG_KEY, lang);
+    document.title =
+      lang === "ro" ? "Rampa — CMR pentru flote din România" : "Rampa — CMR for Romanian fleets";
   }, [lang]);
-
-  function switchLang() {
+  function changeLanguage() {
     const next = lang === "ro" ? "en" : "ro";
     setLang(next);
-    setForm((current) => ({
-      ...current,
-      role: copy[next].form.roles[0],
-      fleet: copy[next].form.fleets[1],
-      lane: copy[next].form.laneOptions[1],
-      pain: copy[next].form.pains[0],
-    }));
-  }
-
-  function onSubmit(event: FormEvent) {
-    event.preventDefault();
-    if (!form.name.trim() || !form.company.trim() || !form.email.trim()) {
-      setError(t.form.required);
-      return;
+    try {
+      localStorage.setItem("rampa.lang", next);
+    } catch {
+      /* Preference persistence is optional. */
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      setError(t.form.invalidEmail);
-      return;
-    }
-    setError("");
-    saveLead({
-      name: form.name.trim(),
-      company: form.company.trim(),
-      role: form.role,
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      fleet: form.fleet,
-      lane: form.lane,
-      pain: form.pain,
-    });
-    setSent(true);
   }
-
   return (
-    <div className="min-h-screen bg-asphalt text-paper">
-      <div className="h-1 bg-amber" />
-      <header className="sticky top-0 z-20 border-b border-line bg-asphalt/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
-          <a href="#top" className="flex items-center gap-3">
-            <Seal className="h-11 w-11" />
-            <span className="text-lg font-medium tracking-tight">{COMPANY}</span>
+    <div className="rampa-site" id="top">
+      <a className="skip-link" href="#main">
+        {t.skip}
+      </a>
+      <header
+        className="site-header"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setMenuOpen(false);
+        }}
+      >
+        <div className="shell header-inner">
+          <a className="brand" href="#top" aria-label="Rampa">
+            <Seal className="brand-seal" />
+            <span>
+              rampa<span className="brand-period">.</span>
+            </span>
           </a>
-          <nav className="hidden items-center gap-8 text-sm text-mist md:flex">
-            <a href="#fit" className="hover:text-paper">
-              {t.nav.fit}
-            </a>
-            <a href="#how" className="hover:text-paper">
-              {t.nav.how}
-            </a>
-            <a href="#list" className="hover:text-paper">
-              {t.nav.access}
-            </a>
+          <nav
+            className="desktop-nav"
+            aria-label={lang === "ro" ? "Navigare principală" : "Main navigation"}
+          >
+            {t.nav.map((label, index) => (
+              <a key={index} href={anchors[index]}>
+                {label}
+              </a>
+            ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="header-actions">
             <button
+              className="language-button"
               type="button"
-              onClick={switchLang}
-              className="min-h-11 rounded-full border border-line px-4 text-sm text-mist hover:text-paper"
+              onClick={changeLanguage}
+              aria-label={lang === "ro" ? "Switch to English" : "Schimbă în română"}
             >
-              {t.nav.lang}
+              {lang === "ro" ? "EN" : "RO"}
+              <span aria-hidden="true">↗</span>
             </button>
-            <a
-              href="#list"
-              className="hidden min-h-11 items-center rounded-full bg-amber px-4 text-sm font-medium text-ink md:inline-flex"
-            >
-              {t.hero.primary}
+            <a className="button button-amber header-cta" href="#list">
+              {t.pilot}
+              <ArrowUpRight size={16} aria-hidden="true" />
             </a>
             <button
               type="button"
-              className="grid h-11 w-11 place-items-center rounded-full border border-line md:hidden"
-              aria-label="Menu"
-              onClick={() => setOpen((value) => !value)}
+              className="mobile-menu-button icon-button"
+              aria-label={t.menu}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen(!menuOpen)}
             >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
-        {open && (
-          <div className="flex flex-col gap-1 border-t border-line px-5 py-3 md:hidden">
-            <a href="#fit" onClick={() => setOpen(false)} className="min-h-11 py-2 text-mist">
-              {t.nav.fit}
+        {menuOpen && (
+          <nav id="mobile-nav" className="mobile-nav shell" aria-label={t.menu}>
+            {t.nav.map((label, index) => (
+              <a key={index} href={anchors[index]} onClick={() => setMenuOpen(false)}>
+                {label}
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+            ))}
+            <a href="#list" onClick={() => setMenuOpen(false)}>
+              {t.pilot}
+              <ArrowRight size={16} aria-hidden="true" />
             </a>
-            <a href="#how" onClick={() => setOpen(false)} className="min-h-11 py-2 text-mist">
-              {t.nav.how}
-            </a>
-            <a href="#list" onClick={() => setOpen(false)} className="min-h-11 py-2 text-mist">
-              {t.nav.access}
-            </a>
-          </div>
+          </nav>
         )}
       </header>
-
-      <main id="top">
-        <section className="mx-auto grid max-w-6xl gap-12 px-5 py-14 lg:grid-cols-2 lg:py-20">
-          <div>
-            <p className="font-mono text-xs tracking-widest text-amber uppercase">{t.hero.kicker}</p>
-            <h1 className="mt-4 text-4xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
-              {t.hero.title}
+      <main id="main">
+        <section className="hero shell" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="launch-status">
+              <span className="status-dot" />
+              {t.status}
+            </p>
+            <p className="eyebrow hero-kicker">{t.kicker}</p>
+            <h1 id="hero-title">
+              {t.headline[0]}
+              <br />
+              <span>{t.headline[1]}</span>
             </h1>
-            <p className="mt-4 text-xl text-amber">{t.hero.accent}</p>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-mist">{t.hero.body}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#list"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-amber px-5 font-medium text-ink"
-              >
-                {t.hero.primary}
-                <ArrowRight className="h-4 w-4" aria-hidden />
+            <p className="hero-intro">{t.intro}</p>
+            <p className="hero-body">{t.body}</p>
+            <div className="hero-actions">
+              <a className="button button-amber" href="#list">
+                {t.pilot}
+                <ArrowUpRight size={18} aria-hidden="true" />
               </a>
-              <a
-                href="#cmr"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-line px-5 text-paper"
-              >
-                {t.hero.secondary}
+              <a className="button button-outline" href="#example">
+                {t.see}
+                <ArrowDown size={17} aria-hidden="true" />
               </a>
             </div>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-fog">{t.hero.note}</p>
+            <p className="hero-note">{t.note}</p>
+            <div className="hero-route" aria-hidden="true">
+              <span>RO</span>
+              <span className="hero-route-line" />
+              <Truck size={22} />
+              <span className="hero-route-line" />
+              <span>EU</span>
+              <span className="route-caption">DOCUMENTE ÎN MIȘCARE / RAMPA</span>
+            </div>
           </div>
-
-          <div id="cmr" className="rounded-card bg-paper p-5 text-ink shadow-none sm:p-7">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="font-mono text-xs tracking-widest text-fog uppercase">{t.cmr.doc}</p>
-                <h2 className="mt-1 text-2xl font-medium">CMR</h2>
-                <p className="mt-1 font-mono text-xs text-fog">{lane.ref}</p>
+          <TripDemo lang={lang} />
+        </section>
+        <div className="process-strip">
+          <div className="shell">
+            {t.strip.map((item, index) => (
+              <div key={item}>
+                <span>{item}</span>
+                {index < 2 ? (
+                  <ArrowRight size={20} aria-hidden="true" />
+                ) : (
+                  <Check size={20} aria-hidden="true" />
+                )}
               </div>
-              <Seal className="h-24 w-24 shrink-0 -rotate-6" />
+            ))}
+          </div>
+        </div>
+        <section className="pain-section light-section" aria-labelledby="pain-title">
+          <div className="shell">
+            <div className="section-heading">
+              <p className="eyebrow">{t.painLabel}</p>
+              <h2 id="pain-title">{t.painTitle}</h2>
+              <span className="section-index" aria-hidden="true">
+                01 — 03
+              </span>
             </div>
-            <p className="mt-3 text-sm text-fog">{t.cmr.hint}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {lanes.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setLane(item)}
-                  className={`min-h-11 rounded-full px-3 text-sm ${
-                    item.id === lane.id ? "bg-ink text-paper" : "bg-asphalt/5 text-ink"
-                  }`}
-                >
-                  {item.route}
-                </button>
-              ))}
-            </div>
-            <div className="mt-2 grid sm:grid-cols-2 sm:gap-x-6">
-              <Field label={t.cmr.shipper} value={lane.shipper} />
-              <Field label={t.cmr.consignee} value={lane.consignee} />
-              <Field label={t.cmr.load} value={lane.load} />
-              <Field label={t.cmr.unload} value={lane.unload} />
-              <Field label={t.cmr.goods} value={lane.goods} />
-              <Field label={t.cmr.weight} value={lane.weight} />
-              <Field label={t.cmr.plates} value={lane.plates} />
-              <Field label={t.cmr.ref} value={lane.ref} />
+            <div className="pain-grid">
+              {t.pains.map((pain, index) => {
+                const Icon = painIcons[index];
+                return (
+                  <article key={pain.title}>
+                    <div className="pain-top">
+                      <Icon size={28} strokeWidth={1.4} aria-hidden="true" />
+                      <span>0{index + 1}</span>
+                    </div>
+                    <h3>{pain.title}</h3>
+                    <p>{pain.body}</p>
+                    <span className="pain-tag">
+                      <span />
+                      {pain.tag}
+                    </span>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
-
-        <section className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-16">
-            <h2 className="max-w-xl text-3xl font-medium tracking-tight">{t.painsTitle}</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {t.pains.map((pain) => (
-                <article key={pain.title} className="rounded-card border border-line bg-panel p-6">
-                  <h3 className="text-lg font-medium">{pain.title}</h3>
-                  <p className="mt-3 leading-relaxed text-mist">{pain.body}</p>
-                </article>
-              ))}
-            </div>
+        <section className="workflow-section shell" id="how" aria-labelledby="workflow-title">
+          <div className="section-heading">
+            <p className="eyebrow">{t.workflowLabel}</p>
+            <h2 id="workflow-title">{t.workflowTitle}</h2>
+            <p className="section-description">{t.workflowBody}</p>
           </div>
-        </section>
-
-        <section id="fit" className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-16">
-            <h2 className="max-w-2xl text-3xl font-medium tracking-tight">{t.fitTitle}</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-mist">{t.fitLead}</p>
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <article className="rounded-card border border-line bg-panel p-6">
-                <div className="flex items-center gap-2 text-amber">
-                  <ClipboardCheck className="h-5 w-5" aria-hidden />
-                  <h3 className="font-medium">{t.yes}</h3>
-                </div>
-                <ul className="mt-4 space-y-3">
-                  {t.yesItems.map((item) => (
-                    <li key={item} className="leading-relaxed text-paper">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-              <article className="rounded-card border border-line p-6">
-                <h3 className="font-medium text-mist">{t.no}</h3>
-                <ul className="mt-4 space-y-3">
-                  {t.noItems.map((item) => (
-                    <li key={item} className="leading-relaxed text-mist">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section id="how" className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-16">
-            <h2 className="text-3xl font-medium tracking-tight">{t.howTitle}</h2>
-            <ol className="mt-8 grid gap-4 md:grid-cols-3">
-              {t.steps.map((step) => (
-                <li key={step.n} className="rounded-card border border-line p-6">
-                  <div className="font-mono text-sm text-amber">{step.n}</div>
-                  <h3 className="mt-3 text-xl font-medium">{step.title}</h3>
-                  <p className="mt-3 leading-relaxed text-mist">{step.body}</p>
+          <div className="workflow-layout">
+            <ol className="workflow-steps">
+              {t.steps.map((step, index) => (
+                <li key={step.title}>
+                  <span className="step-number">0{index + 1}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.body}</p>
+                  </div>
                 </li>
               ))}
             </ol>
-            <div className="mt-6 flex items-center gap-3 text-sm text-fog">
-              <Archive className="h-4 w-4 text-amber" aria-hidden />
-              <span>{t.cmr.title}</span>
-            </div>
-          </div>
-        </section>
-
-        <section id="list" className="border-t border-line">
-          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 lg:grid-cols-5">
-            <div className="lg:col-span-2">
-              <h2 className="text-3xl font-medium tracking-tight">{t.form.title}</h2>
-              <p className="mt-4 leading-relaxed text-mist">{t.form.lead}</p>
-            </div>
-            <div className="rounded-card border border-line bg-panel p-6 lg:col-span-3">
-              {sent ? (
+            <div className="archive-demo">
+              <div className="archive-top">
+                <Archive size={18} aria-hidden="true" />
+                <span>{t.planned}</span>
+                <span className="small-dot" />
+              </div>
+              <div className="archive-trip">
+                <span className="eyebrow">RMP-20418 / RO → DE</span>
+                <h3>
+                  Cluj-Napoca <ArrowRight size={24} aria-hidden="true" /> München
+                </h3>
+                <p>Atelier Nord SRL → Werkstatt Süd GmbH</p>
+              </div>
+              <div className="archive-doc">
+                <FileText size={34} strokeWidth={1.3} aria-hidden="true" />
                 <div>
-                  <h3 className="text-2xl font-medium">{t.form.successTitle}</h3>
-                  <p className="mt-3 leading-relaxed text-mist">{t.form.successBody}</p>
-                  <button
-                    type="button"
-                    className="mt-6 min-h-11 rounded-full border border-line px-5"
-                    onClick={() => {
-                      setSent(false);
-                      setForm((current) => ({ ...current, name: "", company: "", email: "", phone: "" }));
-                    }}
-                  >
-                    {t.form.another}
-                  </button>
+                  <strong>CMR_RMP-20418.pdf</strong>
+                  <span>{t.archive[1]}</span>
                 </div>
-              ) : (
-                <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
-                  <label className="block text-sm">
-                    {t.form.name}
-                    <input
-                      value={form.name}
-                      onChange={(event) => setForm({ ...form, name: event.target.value })}
-                      className="mt-2 min-h-11 w-full rounded-2xl border border-line bg-asphalt px-3 text-paper outline-none focus:border-amber"
-                      autoComplete="name"
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    {t.form.company}
-                    <input
-                      value={form.company}
-                      onChange={(event) => setForm({ ...form, company: event.target.value })}
-                      className="mt-2 min-h-11 w-full rounded-2xl border border-line bg-asphalt px-3 text-paper outline-none focus:border-amber"
-                      autoComplete="organization"
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    {t.form.email}
-                    <input
-                      value={form.email}
-                      onChange={(event) => setForm({ ...form, email: event.target.value })}
-                      className="mt-2 min-h-11 w-full rounded-2xl border border-line bg-asphalt px-3 text-paper outline-none focus:border-amber"
-                      autoComplete="email"
-                      inputMode="email"
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    {t.form.phone}
-                    <input
-                      value={form.phone}
-                      onChange={(event) => setForm({ ...form, phone: event.target.value })}
-                      className="mt-2 min-h-11 w-full rounded-2xl border border-line bg-asphalt px-3 text-paper outline-none focus:border-amber"
-                      autoComplete="tel"
-                      inputMode="tel"
-                    />
-                  </label>
-                  <Select
-                    label={t.form.role}
-                    value={form.role}
-                    options={t.form.roles}
-                    onChange={(role) => setForm({ ...form, role })}
-                  />
-                  <Select
-                    label={t.form.fleet}
-                    value={form.fleet}
-                    options={t.form.fleets}
-                    onChange={(fleet) => setForm({ ...form, fleet })}
-                  />
-                  <Select
-                    label={t.form.lanes}
-                    value={form.lane}
-                    options={t.form.laneOptions}
-                    onChange={(laneChoice) => setForm({ ...form, lane: laneChoice })}
-                  />
-                  <Select
-                    label={t.form.pain}
-                    value={form.pain}
-                    options={t.form.pains}
-                    onChange={(pain) => setForm({ ...form, pain })}
-                  />
-                  {error && <p className="text-sm text-amber sm:col-span-2">{error}</p>}
-                  <button
-                    type="submit"
-                    className="min-h-11 rounded-full bg-amber px-5 font-medium text-ink sm:col-span-2"
-                  >
-                    {t.form.submit}
-                  </button>
-                </form>
-              )}
+                <Check size={18} aria-hidden="true" />
+              </div>
+              <div className="archive-return">
+                <div className="scan-illustration" aria-hidden="true">
+                  <ScanLine size={24} />
+                  <div className="signature-line" />
+                </div>
+                <div>
+                  <span className="archive-badge">{t.archive[3]}</span>
+                  <p>{t.archiveNote}</p>
+                </div>
+              </div>
+              <div className="archive-bottom">
+                <Archive size={15} aria-hidden="true" />
+                <span>{t.archive[4]} / RMP-20418</span>
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </div>
             </div>
           </div>
         </section>
-
-        <section className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-16">
-            <h2 className="text-3xl font-medium tracking-tight">{t.faqTitle}</h2>
-            <div className="mt-8 divide-y divide-line border-y border-line">
-              {t.faqs.map((item) => (
-                <details key={item.q} className="group py-4">
-                  <summary className="cursor-pointer list-none text-lg font-medium marker:content-none">
-                    {item.q}
-                  </summary>
-                  <p className="mt-3 max-w-3xl leading-relaxed text-mist">{item.a}</p>
-                </details>
-              ))}
+        <section id="fit" className="fit-section">
+          <div className="shell fit-layout">
+            <div>
+              <p className="eyebrow">{t.fitLabel}</p>
+              <h2>{t.fitTitle}</h2>
+              <p className="fit-body">{t.fitBody}</p>
             </div>
+            <div>
+              <ul className="fit-list">
+                {t.yes.map((line) => (
+                  <li key={line}>
+                    <Check size={18} aria-hidden="true" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <div className="scope-note">
+                <span>↳</span>
+                <div>
+                  <h3>{t.scopeTitle}</h3>
+                  <p>{t.scope}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="pilot-section light-section" id="list" aria-labelledby="pilot-title">
+          <div className="shell pilot-layout">
+            <div className="pilot-copy">
+              <p className="eyebrow">{t.formLabel}</p>
+              <h2 id="pilot-title">{t.formTitle}</h2>
+              <p>{t.formBody}</p>
+              <ul>
+                {t.formBenefits.map((line, index) => (
+                  <li key={line}>
+                    <span>0{index + 1}</span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <Seal className="pilot-seal" />
+            </div>
+            <PilotForm lang={lang} />
+          </div>
+        </section>
+        <section className="faq-section shell">
+          <div>
+            <p className="eyebrow">{t.faqLabel}</p>
+            <h2>{t.faqTitle}</h2>
+          </div>
+          <div className="faq-list">
+            {t.faqs.map((item) => (
+              <details key={item.q}>
+                <summary>
+                  {item.q}
+                  <Plus size={20} aria-hidden="true" />
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-sm text-fog sm:flex-row sm:items-center sm:justify-between">
-          <p>{t.footer}</p>
-          <Link to="/fisa" className="text-mist hover:text-paper">
-            {t.fisa}
-          </Link>
+      <footer className="site-footer">
+        <div className="shell">
+          <div className="footer-top">
+            <a className="brand" href="#top">
+              <Seal className="brand-seal" />
+              <span>
+                rampa<span className="brand-period">.</span>
+              </span>
+            </a>
+            <p>{t.footer}</p>
+            <a href="#top" className="footer-up" aria-label={t.top}>
+              <ArrowUpRight size={23} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="footer-bottom">
+            <span>© 2026 {t.copyright}</span>
+            <a href="mailto:dahwa.adam.alexander@gmail.com">
+              {lang === "ro" ? "Vorbește cu noi" : "Talk to us"} ↗
+            </a>
+            <Link to="/confidentialitate">{t.privacy}</Link>
+          </div>
         </div>
       </footer>
     </div>
-  );
-}
-
-function Select({
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  options: string[];
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="block text-sm">
-      {label}
-      <select
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="mt-2 min-h-11 w-full rounded-2xl border border-line bg-asphalt px-3 text-paper outline-none focus:border-amber"
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </label>
   );
 }

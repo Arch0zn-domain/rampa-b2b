@@ -31,6 +31,7 @@ export type OgSite = {
   image?: string;
   banner?: string;
   color?: string;
+  publicHost?: string;
 };
 
 export type GrokHeadContext = {

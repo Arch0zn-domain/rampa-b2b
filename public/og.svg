@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Rampa — CMR-uri pentru flote cu 5–50 de camioane</title>
+  <desc>Comanda intră. CMR-ul pleacă. O fișă de transport pe fundal verde închis, alături de sigiliul Rampa.</desc>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#f5f2e9" stroke-opacity=".035"/>
+    </pattern>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#111714"/>
+  <rect x="720" width="480" height="630" fill="url(#grid)"/>
+  <path d="M64 158H1136M64 550H1136" stroke="#f5f2e9" stroke-opacity=".17"/>
+  <g transform="translate(62 42) scale(.76)">
+    <circle cx="60" cy="60" r="58" fill="#111714"/>
+    <circle cx="60" cy="60" r="54" fill="none" stroke="#f5b82e" stroke-width="2"/>
+    <circle cx="60" cy="60" r="46" fill="none" stroke="#f5f2e9"/>
+    <circle cx="60" cy="60" r="40" fill="#f5f2e9"/>
+    <path id="ring" d="M18 66a44 44 0 0 1 84 0" fill="none"/>
+    <text fill="#f5b82e" font-family="Consolas,monospace" font-size="11" letter-spacing="3"><textPath href="#ring" startOffset="50%" text-anchor="middle">RAMPA</textPath></text>
+    <path d="M36 70h30l7-14h14" fill="none" stroke="#f5b82e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M40 70v7h34" fill="none" stroke="#111714" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="49" cy="79" r="3.4" fill="#111714"/>
+    <circle cx="68" cy="79" r="3.4" fill="#111714"/>
+  </g>
+  <text x="171" y="100" font-family="Segoe UI,Arial,sans-serif" font-size="37" font-weight="600" letter-spacing="-1.5" fill="#f5f2e9">rampa</text>
+  <text x="1136" y="95" text-anchor="end" font-family="Consolas,monospace" font-size="13" letter-spacing="1.3" fill="#b7bfb5">PENTRU CEI CARE ȚIN FLOTA ÎN MIȘCARE.</text>
+  <text x="64" y="220" font-family="Consolas,monospace" font-size="13" letter-spacing="2" fill="#f5b82e">MAI PUȚINĂ BIROCRAȚIE. MAI MULT DRUM.</text>
+  <g font-family="Georgia,serif" font-size="77" letter-spacing="-3.5">
+    <text x="60" y="325" fill="#f5f2e9">Comanda intră.</text>
+    <text x="60" y="415" fill="#f5b82e" font-style="italic">CMR-ul pleacă.</text>
+  </g>
+  <text x="64" y="485" font-family="Segoe UI,Arial,sans-serif" font-size="23" fill="#b7bfb5">CMR-uri pentru flote cu 5–50 de camioane.</text>
+  <g transform="translate(845 203) rotate(8 145 160)">
+    <rect width="275" height="313" fill="#28312b" stroke="#f5b82e" stroke-opacity=".6"/>
+  </g>
+  <g transform="translate(797 189) rotate(-6 155 164)" filter="url(#shadow)">
+    <rect width="305" height="327" fill="#f5f2e9"/>
+    <path d="M0 0H305V8H0Z" fill="#f5b82e"/>
+    <text x="24" y="41" font-family="Consolas,monospace" font-size="10" letter-spacing="1.5" fill="#657064">SCRISOARE DE TRĂSURĂ</text>
+    <text x="22" y="107" font-family="Georgia,serif" font-size="60" letter-spacing="-2" fill="#111714">CMR</text>
+    <rect x="236" y="63" width="45" height="45" rx="23" fill="#f5b82e"/>
+    <path d="m249 85 7 7 13-15" fill="none" stroke="#111714" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24 130H281M24 208H281M24 280H281M151 130V280" stroke="#111714" stroke-opacity=".22"/>
+    <g font-family="Consolas,monospace" font-size="8" letter-spacing=".8" fill="#657064">
+      <text x="24" y="150">01 / ÎNCĂRCARE</text>
+      <text x="166" y="150">02 / DESCĂRCARE</text>
+      <text x="24" y="229">03 / MARFĂ</text>
+      <text x="166" y="229">04 / VEHICUL</text>
+    </g>
+    <g font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#111714">
+      <text x="24" y="180">Brașov</text>
+      <text x="166" y="180">München</text>
+    </g>
+    <path d="M24 250H111M24 258H85M166 250H248M166 258H225" stroke="#111714" stroke-opacity=".28" stroke-width="3"/>
+    <text x="24" y="306" font-family="Consolas,monospace" font-size="9" letter-spacing=".8" fill="#657064">O CURSĂ. TOATE DATELE LA UN LOC.</text>
+  </g>
+  <circle cx="69" cy="587" r="4" fill="#f5b82e"/>
+  <text x="84" y="592" font-family="Consolas,monospace" font-size="13" letter-spacing="1.1" fill="#b7bfb5">GÂNDIT PENTRU TRANSPORTATORII DIN ROMÂNIA</text>
+  <text x="1136" y="592" text-anchor="end" font-family="Segoe UI,Arial,sans-serif" font-size="16" fill="#f5f2e9">rampa-mea.vercel.app ↗</text>
+</svg>
