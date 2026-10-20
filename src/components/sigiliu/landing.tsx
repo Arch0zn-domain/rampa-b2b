@@ -75,6 +75,7 @@ export function Landing() {
                 {label}
               </a>
             ))}
+            <Link to="/aplicatie">{lang === "ro" ? "Aplicația" : "The app"}</Link>
           </nav>
           <div className="header-actions">
             <button
@@ -110,6 +111,10 @@ export function Landing() {
                 <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             ))}
+            <Link to="/aplicatie" onClick={() => setMenuOpen(false)}>
+              {lang === "ro" ? "Aplicația" : "The app"}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
             <a href="#list" onClick={() => setMenuOpen(false)}>
               {t.pilot}
               <ArrowRight size={16} aria-hidden="true" />

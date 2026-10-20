@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AplicatieRouteImport } from './routes/aplicatie'
 import { Route as ConfidentialitateRouteImport } from './routes/confidentialitate'
 import { Route as FisaRouteImport } from './routes/fisa'
 import { Route as ApiPilotRouteImport } from './routes/api.pilot'
@@ -17,6 +18,11 @@ import { Route as ApiPilotRouteImport } from './routes/api.pilot'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AplicatieRoute = AplicatieRouteImport.update({
+  id: '/aplicatie',
+  path: '/aplicatie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfidentialitateRoute = ConfidentialitateRouteImport.update({
@@ -37,12 +43,14 @@ const ApiPilotRoute = ApiPilotRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aplicatie': typeof AplicatieRoute
   '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
   '/api/pilot': typeof ApiPilotRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aplicatie': typeof AplicatieRoute
   '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
   '/api/pilot': typeof ApiPilotRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aplicatie': typeof AplicatieRoute
   '/confidentialitate': typeof ConfidentialitateRoute
   '/fisa': typeof FisaRoute
   '/api/pilot': typeof ApiPilotRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
+  fullPaths: '/' | '/aplicatie' | '/confidentialitate' | '/fisa' | '/api/pilot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
-  id: '__root__' | '/' | '/confidentialitate' | '/fisa' | '/api/pilot'
+  to: '/' | '/aplicatie' | '/confidentialitate' | '/fisa' | '/api/pilot'
+  id:
+    | '__root__'
+    | '/'
+    | '/aplicatie'
+    | '/confidentialitate'
+    | '/fisa'
+    | '/api/pilot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AplicatieRoute: typeof AplicatieRoute
   ConfidentialitateRoute: typeof ConfidentialitateRoute
   FisaRoute: typeof FisaRoute
   ApiPilotRoute: typeof ApiPilotRoute
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aplicatie': {
+      id: '/aplicatie'
+      path: '/aplicatie'
+      fullPath: '/aplicatie'
+      preLoaderRoute: typeof AplicatieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confidentialitate': {
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AplicatieRoute: AplicatieRoute,
   ConfidentialitateRoute: ConfidentialitateRoute,
   FisaRoute: FisaRoute,
   ApiPilotRoute: ApiPilotRoute,

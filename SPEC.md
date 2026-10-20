@@ -1,5 +1,9 @@
 # Rampa experience refresh
 
+## Launch hold — 2026-10-20
+
+The user requested product integration and legal readiness, but chose to leave the service operator identity blank for now. Superseding the original intake acceptance below: remove public contact fields and reject `/api/pilot` before reading or storing input. Add a closed `/aplicatie` entry page for the separate CargoDesk product. Keep the fictional demo available. Do not publish incomplete contracts or claim compliance. Vercel Hobby/commercial eligibility and the applicable processor agreement must be resolved before a business launch. Private legal drafts stay outside Git and deployment uploads. Product production access is guarded independently in its repository; this change does not migrate or duplicate customer accounts.
+
 Improve the existing public Romanian carrier landing page, preserving its brand and English option. This remains a prelaunch product site, not a fleet management application.
 
 ## Deliverables and acceptance

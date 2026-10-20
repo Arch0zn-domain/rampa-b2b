@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { handlePilotRequest, type PilotLead } from "./pilot.server.ts";
+import { handlePilotRequest, processPilotRequest, type PilotLead } from "./pilot.server.ts";
 
 const valid = {
   company: "Atelier Test",
@@ -18,9 +18,28 @@ function request(data: unknown = valid, origin = "https://rampa-mea.vercel.app")
   });
 }
 
+test("public intake is closed before reading or storing personal data", async () => {
+  let read = false;
+  const incoming = new Request("https://rampa-mea.vercel.app/api/pilot", {
+    method: "POST",
+    body: "not a submission",
+  });
+  incoming.body!.getReader = () => {
+    read = true;
+    throw new Error("must not read a closed intake");
+  };
+  const response = await handlePilotRequest(incoming, async () => {
+    assert.fail("closed intake must not persist a contact");
+  });
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { ok: false, code: "intake_closed" });
+  assert.equal(read, false);
+  assert.equal(response.headers.get("cache-control"), "no-store");
+});
+
 test("pilot success waits for durable storage and normalizes contact data", async () => {
   let saved: PilotLead | undefined;
-  const response = await handlePilotRequest(request(), async (lead) => {
+  const response = await processPilotRequest(request(), async (lead) => {
     saved = lead;
   });
   assert.equal(response.status, 201);
@@ -31,7 +50,7 @@ test("pilot success waits for durable storage and normalizes contact data", asyn
 });
 
 test("storage failure never shows a successful signup", async () => {
-  const response = await handlePilotRequest(request(), async () => {
+  const response = await processPilotRequest(request(), async () => {
     throw new Error("storage unavailable");
   });
   assert.equal(response.status, 503);
@@ -50,17 +69,17 @@ test("invalid, unconsented, cross-origin and oversized requests cannot write", a
     { ...valid, company: "a" },
     { ...valid, company: "x".repeat(5000) },
   ]) {
-    assert.ok((await handlePilotRequest(request(body), store)).status >= 400);
+    assert.ok((await processPilotRequest(request(body), store)).status >= 400);
   }
   assert.equal(
-    (await handlePilotRequest(request(valid, "https://another.example"), store)).status,
+    (await processPilotRequest(request(valid, "https://another.example"), store)).status,
     403,
   );
   assert.equal(writes, 0);
 });
 
 test("honeypot returns quietly without saving a contact", async () => {
-  const response = await handlePilotRequest(
+  const response = await processPilotRequest(
     request({ ...valid, website: "spam.example" }),
     async () => {
       assert.fail("bot contact must not be saved");

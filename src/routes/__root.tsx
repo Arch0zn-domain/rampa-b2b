@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Comanda intră. CMR-ul pleacă. Rampa construiește un flux simplu pentru CMR și documente de livrare. Înscrieri în pilot pentru flote cu 5–50 de camioane.",
+          "Comanda intră. CMR-ul pleacă. Rampa construiește un flux simplu pentru CMR și documente de livrare. Demonstrație cu date fictive; pilot în pregătire.",
       },
       { name: "theme-color", content: "#111714" },
     ],
