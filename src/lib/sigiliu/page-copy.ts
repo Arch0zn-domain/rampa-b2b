@@ -1,10 +1,10 @@
 export const pageCopy = {
   ro: {
     nav: ["Exemplul", "Cum va funcționa", "Pentru cine"],
-    pilot: "Înscrie flota în pilot",
+    pilot: "Despre pilot",
     skip: "Sari la conținut",
     menu: "Meniu",
-    status: "ÎN DEZVOLTARE · ÎNSCRIERI PENTRU PILOT",
+    status: "DEMONSTRAȚIE PUBLICĂ · PILOT ÎN PREGĂTIRE",
     kicker: "PENTRU FLOTELE CARE PUN ROMÂNIA ÎN MIȘCARE",
     headline: ["Comanda intră.", "CMR-ul pleacă."],
     intro: "Mai puțin de recopiat. Mai mult timp pentru următoarea cursă.",
@@ -97,10 +97,10 @@ export const pageCopy = {
     formLabel: "CONSTRUIM ÎMPREUNĂ CU PRIMELE FLOTE",
     formTitle: "Următoarea cursă\npoate începe mai simplu.",
     formBody:
-      "Înscrie firma pentru o invitație la pilot. Vrem să înțelegem cum pregătiți CMR-urile și să testăm fluxul pe curse reale, împreună.",
+      "Pregătim pilotul pentru primele flote. Înscrierile și accesul pentru curse reale sunt închise până la finalizarea condițiilor de participare și protecției datelor.",
     formBenefits: [
       "O discuție despre felul vostru de lucru",
-      "O invitație când testarea este disponibilă",
+      "Acces individual, într-un spațiu al firmei",
       "Feedback direct asupra primelor funcții",
     ],
     form: {
@@ -125,7 +125,7 @@ export const pageCopy = {
     faqs: [
       {
         q: "Pot folosi Rampa pentru cursele mele chiar acum?",
-        a: "Încă nu. Poți încerca demonstrația cu date fictive. Produsul pentru curse reale este în dezvoltare, iar formularul înregistrează cereri de invitație în pilot.",
+        a: "Încă nu. Poți încerca demonstrația cu date fictive. Aplicația pentru curse reale și condițiile pilotului sunt în pregătire. Înscrierile sunt momentan închise.",
       },
       {
         q: "Cum ajung datele din comandă în CMR?",
@@ -145,7 +145,7 @@ export const pageCopy = {
       },
       {
         q: "Cât va costa?",
-        a: "Înscrierea pentru o invitație este gratuită și nu creează o obligație de cumpărare. Prețul produsului nu este stabilit. Orice condiții ale pilotului și orice cost ulterior vor fi comunicate înainte de acceptare.",
+        a: "Accesul comercial nu este deschis, iar prețul nu este stabilit. Condițiile pilotului și orice cost vor fi comunicate înainte de acceptare. Demonstrația publică este gratuită.",
       },
     ],
     footer: "Mai puțină hârtie. Mai mult drum.",
@@ -155,10 +155,10 @@ export const pageCopy = {
   },
   en: {
     nav: ["The example", "How it will work", "Who it’s for"],
-    pilot: "Join the fleet pilot",
+    pilot: "About the pilot",
     skip: "Skip to content",
     menu: "Menu",
-    status: "IN DEVELOPMENT · PILOT REGISTRATION OPEN",
+    status: "PUBLIC DEMO · PILOT IN PREPARATION",
     kicker: "FOR THE FLEETS THAT KEEP ROMANIA MOVING",
     headline: ["Order in.", "CMR out."],
     intro: "Less copying. More time for the next trip.",
@@ -251,10 +251,10 @@ export const pageCopy = {
     formLabel: "BUILDING WITH THE FIRST FLEETS",
     formTitle: "The next trip\ncan start more simply.",
     formBody:
-      "Register your company for a pilot invitation. We want to understand how you prepare CMRs and test the workflow on real trips, together.",
+      "We’re preparing the pilot for the first fleets. Registration and real-trip access are closed while participation terms and data-protection arrangements are completed.",
     formBenefits: [
       "A conversation about your workflow",
-      "An invitation when testing is available",
+      "Individual access within a company workspace",
       "Direct feedback on the first features",
     ],
     form: {
@@ -279,7 +279,7 @@ export const pageCopy = {
     faqs: [
       {
         q: "Can I use Rampa for my trips right now?",
-        a: "Not yet. You can try the demonstration with fictional data. The product for real trips is in development; the form registers requests for pilot invitations.",
+        a: "Not yet. You can try the demonstration with fictional data. The real-trip app and pilot terms are being prepared. Registration is currently closed.",
       },
       {
         q: "How do order details become a CMR?",
@@ -299,7 +299,7 @@ export const pageCopy = {
       },
       {
         q: "What will it cost?",
-        a: "Requesting an invitation is free and creates no purchase commitment. Product pricing has not been set. Any pilot terms and subsequent costs will be communicated before acceptance.",
+        a: "Commercial access is not open and pricing has not been set. Pilot terms and any costs will be communicated before acceptance. The public demonstration is free.",
       },
     ],
     footer: "Less paperwork. More road ahead.",

@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { put } from "@vercel/blob";
 import { z } from "zod";
+import { PILOT_INTAKE_OPEN } from "./launch-status.ts";
 
 const schema = z.object({
   company: z.string().trim().min(2).max(120),
@@ -31,6 +32,16 @@ function reply(status: number, ok: boolean) {
 }
 
 export async function handlePilotRequest(request: Request, store = storePilot): Promise<Response> {
+  if (!PILOT_INTAKE_OPEN)
+    return Response.json(
+      { ok: false, code: "intake_closed" },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  return processPilotRequest(request, store);
+}
+
+// Kept independently testable for the reviewed intake reopening.
+export async function processPilotRequest(request: Request, store = storePilot): Promise<Response> {
   const origin = request.headers.get("origin");
   if (origin !== new URL(request.url).origin) return reply(403, false);
   if (!request.headers.get("content-type")?.startsWith("application/json"))
