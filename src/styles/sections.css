@@ -81,7 +81,7 @@
 }
 .pain-top > span {
   font: 0.625rem var(--font-mono);
-  color: #748063;
+  color: #526246;
 }
 .pain-grid h3 {
   margin-top: 2rem;
@@ -180,7 +180,7 @@
   padding: 1.5rem;
 }
 .archive-trip .eyebrow {
-  color: #5a714d;
+  color: #526246;
   font-size: 0.625rem;
 }
 .archive-trip h3 {
@@ -358,7 +358,7 @@
 }
 .pilot-copy li > span {
   font: 0.625rem var(--font-mono);
-  color: #77805f;
+  color: #526246;
 }
 .pilot-seal {
   margin-top: 2.5rem;
